@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import WelcomeImg from '../assets/welcome.png';
-import Button from './Button';
+import Button from '../components/Button';
 import { HiOutlineArrowLongRight } from 'react-icons/hi2';
 
 const WelcomePage = ({ handleClick, setAlertMessage }) => {
 	useEffect(() => {
-		setAlertMessage({ text: 'Note: Open in chrome browser for full Ai functionality' });
+		setAlertMessage({
+			text: 'Note: Open in chrome browser for full Ai functionality',
+		});
 	}, []);
 	return (
 		<>

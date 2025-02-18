@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import WelcomePage from './components/WelcomePage';
-import Translate from './components/Translate';
+import WelcomePage from './pages/WelcomePage';
+import Translate from './pages/Translate';
 import AlertMessageHandler from './components/AlertMessageHandler';
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
 			alertTimeout = setTimeout(() => {
 				setAlertMessage(null);
 				setGeneralMessage(null);
-			}, 10000);
+			}, 8000);
 		}
 
 		if (generalMessage) {

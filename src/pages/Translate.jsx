@@ -1,13 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Button from './Button';
-import { BiArrowBack, BiSend } from 'react-icons/bi';
-import { IoIosSend } from 'react-icons/io';
-import PageHeader from './PageHeader';
+import { BiArrowBack } from 'react-icons/bi';
+import PageHeader from '../components/PageHeader';
 import { handleAiDetectLang, languagesList, summarizeText } from '../utils';
-import Select from './Select';
-import Previewer from './Previewer';
-import Form from './Form';
-import MessageHandler from './Message';
+import Previewer from '../components/Previewer';
+import Form from '../components/Form';
+import MessageHandler from '../components/Message';
 
 const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 	const [translatedContent, setTranslatedContent] = useState('');
