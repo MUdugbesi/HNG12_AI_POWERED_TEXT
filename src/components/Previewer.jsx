@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from './Button';
 import Select from './Select';
-import { Oval } from 'react-loader-spinner';
 
 const Previewer = ({
 	userInput,
@@ -63,16 +62,12 @@ const Previewer = ({
 								'Summarize'
 							) : (
 								<>
-									<div className='flex gap-2'>
+									<div className='flex gap-2 items-center'>
 										Summarizing
-										<Oval
-											visible={true}
-											height='18'
-											width='18'
-											radius='9'
-											color='white'
-											secondaryColor='black'
-											ariaLabel='oval-loading'
+										<img
+											aria-label='oval-loading'
+											className='w-[20px] h-[20px] bg-transparent hover:bg-slate-200'
+											src='/loader-rolling.svg'
 										/>
 									</div>
 								</>
@@ -80,7 +75,7 @@ const Previewer = ({
 						}
 						onclick={handleSummarizeText}
 						className={
-							'py-2 px-5 bg-white text-black border-none mt-2 hover:bg-gray-300 transition-all text-[12px] font-bold disabled:text-white'
+							'py-2 px-5 bg-white text-black border-none mt-2 hover:scale-[1.02] transition-all text-[12px] font-bold disabled:text-white'
 						}
 						disabled={summarizedText}
 					/>
