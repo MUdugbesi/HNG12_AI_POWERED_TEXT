@@ -24,7 +24,7 @@ const Form = ({ handleTranslate, handleChange, text }) => {
 				/>
 			)}
 			<textarea
-				className='w-[90%] min-h-[40vh] md:min-h-[30vh] h-auto text-black border-blue-600 border-2 rounded-xl outline-none focus-visible:border-[3px] pt-2 pl-4 caret-[blue] bg-transparent'
+				className='w-[90%] min-h-[20vh] md:min-h-[20vh] h-auto text-black border-blue-600 border-2 rounded-xl outline-none focus-visible:border-[3px] pt-2 pl-4 caret-[blue] bg-transparent'
 				placeholder='Enter text here'
 				onChange={handleChange}
 				value={text}

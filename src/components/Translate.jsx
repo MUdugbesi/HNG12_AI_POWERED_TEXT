@@ -30,9 +30,13 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 				if (foundLang) {
 					setDetectedLanguageCode(foundLang && foundLang.code);
 					setDetectedLang(foundLang ? foundLang.lang : language);
+					setGeneralMessage({
+						text: 'Language detected!',
+						type: 'success',
+					});
 				} else {
 					setGeneralMessage({
-						text: 'Translation failed, language not found!',
+						text: 'Language detection failed, not found!',
 						type: 'error',
 					});
 				}
@@ -64,6 +68,10 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 			console.error(e);
 		} finally {
 			setIsSummarizing(false);
+			setGeneralMessage({
+				text: 'Completed, summaries generated',
+				type: 'success',
+			});
 		}
 	};
 
@@ -89,7 +97,7 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 	useEffect(() => {
 		if (!userInput.length) return;
 		handleLanguageDetection();
-	}, [handleLanguageDetection, handleTranslate, userInput]);
+	}, [handleLanguageDetection, userInput]);
 
 	const handleBackToHome = () => {
 		setUser(null);
@@ -97,11 +105,11 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 
 	return (
 		<>
-			<div className='translatePage page flex flex-col items-center justify-between pt-4 relative gap-4 md:gap-10'>
+			<div className='translatePage page flex flex-col items-center justify-between pt-4 relative gap-4 md:gap-10 animate__animated animate__fadeInRight'>
 				{generalMessage && (
 					<MessageHandler
 						message={generalMessage}
-						className=' top-20 right-5 text-[10px] md:text-[12px] '
+						className='top-16 md:top-20 right-5 text-[12px] md:text-[12px] '
 					/>
 				)}
 				<PageHeader />

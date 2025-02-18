@@ -13,19 +13,37 @@ const App = () => {
 	const [generalMessage, setGeneralMessage] = useState({});
 
 	useEffect(() => {
-		if (alertMessage !== null || generalMessage !== null) {
-			const timeout = setTimeout(() => {
+		let alertTimeout;
+		let generalTimeout;
+
+		if (alertMessage) {
+			alertTimeout = setTimeout(() => {
 				setAlertMessage(null);
 				setGeneralMessage(null);
-			}, 4000);
-			return () => clearTimeout(timeout);
+			}, 10000);
 		}
+
+		if (generalMessage) {
+			generalTimeout = setTimeout(() => {
+				setGeneralMessage(null);
+			}, 4000);
+		}
+
+		return () => {
+			if (alertTimeout) clearTimeout(alertTimeout);
+			if (generalTimeout) clearTimeout(generalTimeout);
+		};
 	}, [alertMessage, generalMessage]);
 
 	return (
 		<>
 			<main className='relative'>
-				{alertMessage && <AlertMessageHandler alertMessage={alertMessage} />}
+				{alertMessage && (
+					<AlertMessageHandler
+						alertMessage={alertMessage}
+						setAlertMessage={setAlertMessage}
+					/>
+				)}
 				<div>
 					{!user ? (
 						<WelcomePage

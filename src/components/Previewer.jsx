@@ -27,22 +27,26 @@ const Previewer = ({
 					</p>
 				)}
 				<div className='mt-4'>
-					<p>Translate Language</p>
-					<Select
-						options={[
-							'English',
-							'French',
-							'Spanish',
-							'Russian',
-							'Turkish',
-							'Portuguese',
-						]}
-						detectedLang={detectedLanguageCode}
-						text={userInput}
-						handleTranslate={handleTranslate}
-						setTranslatedContent={setTranslatedContent}
-						setGeneralMessage={setGeneralMessage}
-					/>
+					{userInput && (
+						<>
+							<p>Translate Language</p>
+							<Select
+								options={[
+									'English',
+									'French',
+									'Spanish',
+									'Russian',
+									'Turkish',
+									'Portuguese',
+								]}
+								detectedLang={detectedLanguageCode}
+								text={userInput}
+								handleTranslate={handleTranslate}
+								setTranslatedContent={setTranslatedContent}
+								setGeneralMessage={setGeneralMessage}
+							/>
+						</>
+					)}
 
 					{translatedContent && (
 						<p className='my-2'>

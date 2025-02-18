@@ -39,6 +39,6 @@
 
 @layer utilities {
 	.icons {
-		@apply text-black text-[18px] md:text-[24px];
+		@apply text-black text-[18px] md:text-[24px] cursor-pointer;
 	}
 }
