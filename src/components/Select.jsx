@@ -171,7 +171,7 @@ const Select = ({
 				<Button
 					text={`${!isTranslating ? 'Translate' : 'Translating...'}`}
 					className={
-						'w-auto min-w-[100px] py-2 px-5 bg-[#0e1f34] border-[#224e84] border mt-4 hover:bg-gray-800 transition-all text-[12px] font-bold'
+						'w-auto min-w-[100px] py-2 px-5 bg-[#0e1f34] border-[#224e84] border mt-5 hover:bg-gray-800 transition-all text-[12px] font-bold'
 					}
 					disabled={!canTranslate}
 					onclick={() => handleTranslate(translateLanguage)}

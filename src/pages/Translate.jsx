@@ -114,7 +114,7 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 				{generalMessage && (
 					<MessageHandler
 						message={generalMessage}
-						className='-top-5 md:-top-6 md:-right-32 right-5 text-[12px] md:text-[16px] md:tracking-wider'
+						className='-top-6 md:-top-6 md:-right-32 right-5 text-[12px] md:text-[16px] md:tracking-wider'
 					/>
 				)}
 

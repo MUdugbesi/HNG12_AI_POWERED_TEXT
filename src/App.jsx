@@ -47,7 +47,7 @@ const App = () => {
 			setUser(true);
 		} else {
 			setAlertMessage({
-				text: 'Sorry: AI not available in your browser, Open in chrome browser for full AI functionality',
+				text: 'Sorry: AI not available in your browser, Open in chrome / chrome canary for full AI functionality',
 			});
 		}
 	};
