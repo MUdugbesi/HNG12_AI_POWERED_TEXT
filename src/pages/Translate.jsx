@@ -36,7 +36,13 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 						text: 'Language detection failed, not found!',
 						type: 'error',
 					});
+					console.log('error');
 				}
+			} else {
+				setGeneralMessage({
+					text: 'Error! Language Detector API not available, check browser?',
+					type: 'error',
+				});
 			}
 		} catch (e) {
 			setGeneralMessage({ text: 'Error detecting language:', type: 'error' });
@@ -51,9 +57,13 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 			if (result) {
 				setIsSummarizing(true);
 				setSummarizedText(result);
+				setGeneralMessage({
+					text: 'Completed, summaries generated!',
+					type: 'success',
+				});
 			} else {
 				setGeneralMessage({
-					text: 'Error!, performing summarizing operation',
+					text: 'Error!, performing summarizing operation, check browser?',
 					type: 'error',
 				});
 			}
@@ -65,10 +75,6 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 			console.error(e);
 		} finally {
 			setIsSummarizing(false);
-			setGeneralMessage({
-				text: 'Completed, summaries generated',
-				type: 'success',
-			});
 		}
 	};
 
@@ -102,36 +108,47 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 
 	return (
 		<>
-			<div className='translatePage page flex flex-col items-center justify-between pt-4 relative gap-4 md:gap-10 animate__animated animate__fadeInRight'>
+			<div className='md:w-[60%] mx-auto h-auto flex flex-col items-center justify-between mt-5 gap-4 md:gap-10 animate__animated animate__fadeInRight relative'>
 				{generalMessage && (
 					<MessageHandler
 						message={generalMessage}
-						className='top-16 md:top-20 right-5 text-[12px] md:text-[12px] '
+						className='-top-5 md:-top-6 md:-right-32 right-5 text-[12px] md:text-[16px] md:tracking-wider'
 					/>
 				)}
-				<PageHeader />
+
 				<BiArrowBack
-					className='text-black absolute top-5 left-2 text-[22px] hover:cursor-pointer'
+					className='absolute left-2 md:inset-0 text-[20px] md:text-[24px] hover:cursor-pointer'
 					onClick={handleBackToHome}
+					aria-label='Go back arrow'
 				/>
-				<Previewer
-					userInput={userInput}
-					translatedContent={translatedContent}
-					detectedLang={detectedLang}
-					detectedLanguageCode={detectedLanguageCode}
-					handleTranslate={handleTranslate}
-					setTranslatedContent={setTranslatedContent}
-					handleSummarizeText={handleSummarizeText}
-					summarizedText={summarizedText}
-					setGeneralMessage={setGeneralMessage}
-					isSummarizing={isSummarizing}
-					setIsSummarizing={setIsSummarizing}
-				/>
-				<Form
-					handleTranslate={handleTranslate}
-					handleChange={handleInputChange}
-					text={text}
-				/>
+
+				<div
+					className={`w-full h-auto min-h-[90vh] pb-10 flex ${
+						!userInput ? 'justify-center items-center' : 'justify-between'
+					} flex-col`}
+				>
+					{userInput && (
+						<Previewer
+							userInput={userInput}
+							translatedContent={translatedContent}
+							detectedLang={detectedLang}
+							detectedLanguageCode={detectedLanguageCode}
+							handleTranslate={handleTranslate}
+							setTranslatedContent={setTranslatedContent}
+							handleSummarizeText={handleSummarizeText}
+							summarizedText={summarizedText}
+							setGeneralMessage={setGeneralMessage}
+							isSummarizing={isSummarizing}
+							setIsSummarizing={setIsSummarizing}
+						/>
+					)}
+					<Form
+						handleTranslate={handleTranslate}
+						handleChange={handleInputChange}
+						text={text}
+						userInput={userInput}
+					/>
+				</div>
 			</div>
 		</>
 	);

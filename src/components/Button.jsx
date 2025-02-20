@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Button = ({ text, className, onclick, disabled }) => {
+const Button = ({ text, className, onclick, disabled, ariaLabel }) => {
 	return (
 		<button
 			className={`border rounded-md  disabled:bg-gray-500 disabled:border-gray-500 disabled:pointer-events-none disabled:cursor-not-allowed disabled:hover:cursor-not-allowed  ${
@@ -8,6 +8,7 @@ const Button = ({ text, className, onclick, disabled }) => {
 			}`}
 			onClick={onclick}
 			disabled={disabled}
+			aria-label={ariaLabel}
 		>
 			{text}
 		</button>

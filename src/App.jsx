@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import WelcomePage from './pages/WelcomePage';
 import Translate from './pages/Translate';
 import AlertMessageHandler from './components/AlertMessageHandler';
+import PageHeader from './components/PageHeader';
 
 const App = () => {
 	const [user, setUser] = useState(false);
@@ -9,7 +10,6 @@ const App = () => {
 		setUser(true);
 	};
 	const [alertMessage, setAlertMessage] = useState({});
-
 	const [generalMessage, setGeneralMessage] = useState({});
 
 	useEffect(() => {
@@ -37,25 +37,28 @@ const App = () => {
 
 	return (
 		<>
-			<main className='relative'>
+			<main className='relative h-auto min-h-[100vh] w-[100vw] flex flex-col items-center justify-center'>
 				{alertMessage && (
 					<AlertMessageHandler
 						alertMessage={alertMessage}
 						setAlertMessage={setAlertMessage}
 					/>
 				)}
-				<div>
+				<div className='w-full relative'>
 					{!user ? (
 						<WelcomePage
 							handleClick={handleClick}
 							setAlertMessage={setAlertMessage}
 						/>
 					) : (
-						<Translate
-							setUser={setUser}
-							generalMessage={generalMessage}
-							setGeneralMessage={setGeneralMessage}
-						/>
+						<>
+							<PageHeader />
+							<Translate
+								setUser={setUser}
+								generalMessage={generalMessage}
+								setGeneralMessage={setGeneralMessage}
+							/>
+						</>
 					)}
 				</div>
 			</main>

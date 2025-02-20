@@ -11,30 +11,31 @@ const WelcomePage = ({ handleClick, setAlertMessage }) => {
 	}, []);
 	return (
 		<>
-			<section className='welcome-page page animate__animated animate__fadeIn animate__slow flex flex-col justify-evenly items-center relative'>
-				<div className='w-full md:w-[80%] mx-auto pt-10'>
+			<section className='h-[700px] my-auto animate__animated animate__fadeIn animate__slow flex flex-col justify-evenly items-center relative'>
+				<div className='w-[80%] md:w-[30%] mx-auto'>
 					<img src={WelcomeImg} />
 				</div>
 				<div className='w-full'>
-					<h1 className='text-center font-bold text-[24px] md:text-[48px] font-alatsi w-[90%] md:w-[70%] mx-auto '>
+					<h1 className='text-center font-bold text-[24px] md:text-[48px] font-alatsi w-[60%] md:w-[70%] mx-auto '>
 						Translate, Summarize and Detect
 					</h1>
-					<p className='text-center italic text-[12px]'>
+					<p className='text-center italic mt-4 text-[12px] md:text-[14px]'>
 						From one language to another
 					</p>
 				</div>
 
-				<div className='btn-ctn w-full flex items-center justify-end pr-10 animate__animated  animate__slideInRight transition-all '>
+				<div className=' w-[200px] mx-auto flex items-center justify-center animate__animated  animate__slideInRight transition-all '>
 					<Button
 						text={
 							<>
-								<HiOutlineArrowLongRight className='icons' />
+								<HiOutlineArrowLongRight className='icons text-black' />
 							</>
 						}
 						className={
-							'w-[58px] h-[43px] bg-white flex items-center justify-center rounded-xl hover:scale-[1.04] transition-scale'
+							'w-full mt-4 h-[43px] bg-white flex items-center justify-center rounded-xl hover:scale-[1.04] transition-scale'
 						}
 						onclick={handleClick}
+						ariaLabel={'Get started button'}
 					/>
 				</div>
 			</section>

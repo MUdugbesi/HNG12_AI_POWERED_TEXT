@@ -10,10 +10,12 @@ const Select = ({
 	text,
 	setTranslatedContent,
 	setGeneralMessage,
+	ariaLabel,
 }) => {
 	const [open, setOpen] = useState(null);
 	const [message, setMessage] = useState({});
 	const [canTranslate, setCanTranslate] = useState(false);
+	const [isTranslating, setIsTranslating] = useState(false);
 	const dropdownRef = useRef();
 
 	const handleSelectLanguage = (opt) => {
@@ -74,6 +76,7 @@ const Select = ({
 	};
 
 	const handleTranslate = async (selectedLanguage) => {
+		setIsTranslating(true);
 		const languageObj = languagesList.find(
 			(language) => language.lang === selectedLanguage
 		);
@@ -110,6 +113,10 @@ const Select = ({
 			);
 			if (translated) {
 				setTranslatedContent(translated);
+				setGeneralMessage({
+					text: 'Language Translation process completed!',
+					type: 'success',
+				});
 			} else {
 				setGeneralMessage({
 					text: 'Unable to create translator for the given source and target language.',
@@ -119,6 +126,8 @@ const Select = ({
 		} catch (error) {
 			setGeneralMessage({ text: 'Translation failed:', type: 'error' });
 			console.error(error);
+		} finally {
+			setIsTranslating(false);
 		}
 	};
 
@@ -126,12 +135,17 @@ const Select = ({
 		<>
 			<div className='relative w-full' ref={dropdownRef}>
 				<div
-					className='w-full border-2 border-[#07373F] bg-transparent h-[44px] rounded-lg pl-2 flex items-center justify-between cursor-pointer relative'
+					className='w-full border border-[#224e84] bg-transparent h-[44px] rounded-lg pl-2 flex items-center justify-between cursor-pointer relative'
 					onClick={handleOpenSelect}
+					aria-label={ariaLabel}
 				>
 					<span>{translateLanguage}</span>
 					<span className='pr-2'>
-						{!open ? <IoIosArrowDown /> : <IoIosArrowUp />}
+						{!open ? (
+							<IoIosArrowDown aria-label='arrow-down' />
+						) : (
+							<IoIosArrowUp aria-label='arrow-up' />
+						)}
 					</span>
 					<MessageHandler
 						message={message}
@@ -140,7 +154,7 @@ const Select = ({
 				</div>
 				{open && (
 					<ul
-						className={`absolute left-0 w-full bg-[#0e1f34] border border-[#07373F] rounded-lg mt-1 shadow-lg z-10`}
+						className={`absolute left-0 w-full bg-[#0e1f34] border border-[#224e84] rounded-lg mt-1 shadow-lg z-10`}
 					>
 						{options.map((option, index) => (
 							<li
@@ -155,12 +169,13 @@ const Select = ({
 				)}
 
 				<Button
-					text={'Translate'}
+					text={`${!isTranslating ? 'Translate' : 'Translating...'}`}
 					className={
-						'py-2 px-5 bg-[#0e1f34] border-none mt-2 hover:bg-gray-800 transition-all text-[12px]'
+						'w-auto min-w-[100px] py-2 px-5 bg-[#0e1f34] border-[#224e84] border mt-4 hover:bg-gray-800 transition-all text-[12px] font-bold'
 					}
 					disabled={!canTranslate}
 					onclick={() => handleTranslate(translateLanguage)}
+					ariaLabel={'Translate Button'}
 				/>
 			</div>
 		</>

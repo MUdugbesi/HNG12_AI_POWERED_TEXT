@@ -5,7 +5,7 @@ import { IoStarOutline } from 'react-icons/io5';
 const PageHeader = () => {
 	return (
 		<>
-			<header className='flex h-[48px] w-[75%] text-black justify-between items-center'>
+			<header className='flex h-[48px] w-[75%] mx-auto justify-between items-center md:mt-10'>
 				<img
 					src={Logo}
 					alt='logo'

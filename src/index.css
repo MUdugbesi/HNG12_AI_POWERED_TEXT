@@ -15,30 +15,12 @@
 }
 
 @layer components {
-	.welcome-page,
-	.previewer {
-		background: radial-gradient(
-			circle,
-			rgba(113, 95, 227, 1) 0%,
-			rgba(86, 63, 230, 1) 100%
-		);
-	}
 
-	.page {
-		@apply w-[335px] md:w-[650px] lg:w-[700px] h-auto min-h-[700px] mt-20 mb-20 md:h-auto md:min-h-[858px] mx-auto rounded-2xl pb-10;
-	}
-
-	.translatePage {
-		background: radial-gradient(
-			circle,
-			rgba(255, 255, 255, 1) 0%,
-			rgba(235, 233, 233, 1) 100%
-		);
-	}
 }
 
 @layer utilities {
 	.icons {
-		@apply text-black text-[18px] md:text-[24px] cursor-pointer;
+		@apply text-[18px] md:text-[24px] cursor-pointer;
 	}
 }
+/*  */
