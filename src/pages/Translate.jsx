@@ -106,6 +106,8 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 		setUser(null);
 	};
 
+	
+
 	return (
 		<>
 			<div className='md:w-[60%] mx-auto h-auto flex flex-col items-center justify-between mt-5 gap-4 md:gap-10 animate__animated animate__fadeInRight relative'>

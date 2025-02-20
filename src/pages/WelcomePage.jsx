@@ -3,12 +3,8 @@ import WelcomeImg from '../assets/welcome.png';
 import Button from '../components/Button';
 import { HiOutlineArrowLongRight } from 'react-icons/hi2';
 
-const WelcomePage = ({ handleClick, setAlertMessage }) => {
-	useEffect(() => {
-		setAlertMessage({
-			text: 'Note: Open in chrome browser for full Ai functionality',
-		});
-	}, []);
+const WelcomePage = ({ handleClick }) => {
+
 	return (
 		<>
 			<section className='h-[700px] my-auto animate__animated animate__fadeIn animate__slow flex flex-col justify-evenly items-center relative'>

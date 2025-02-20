@@ -38,6 +38,7 @@ export const handleAiDetectLang = async (userInput) => {
 			const bestMatch = results.reduce((max, result) =>
 				result.confidence > max.confidence ? result : max
 			);
+
 			return bestMatch.detectedLanguage; // Return the most confident language
 		} else {
 			console.error('No language detected.');

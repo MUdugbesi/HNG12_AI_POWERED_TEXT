@@ -6,10 +6,8 @@ import PageHeader from './components/PageHeader';
 
 const App = () => {
 	const [user, setUser] = useState(false);
-	const handleClick = () => {
-		setUser(true);
-	};
-	const [alertMessage, setAlertMessage] = useState({});
+
+	const [alertMessage, setAlertMessage] = useState(null);
 	const [generalMessage, setGeneralMessage] = useState({});
 
 	useEffect(() => {
@@ -35,6 +33,25 @@ const App = () => {
 		};
 	}, [alertMessage, generalMessage]);
 
+	const getBrowserAgent = () => {
+		const userAgent = navigator.userAgent;
+
+		if (!userAgent.includes('Chrome')) {
+			return;
+		}
+		return true;
+	};
+	const handleClick = () => {
+		const isRightBrowser = getBrowserAgent();
+		if (isRightBrowser !== undefined) {
+			setUser(true);
+		} else {
+			setAlertMessage({
+				text: 'Sorry: AI not available in your browser, Open in chrome browser for full AI functionality',
+			});
+		}
+	};
+
 	return (
 		<>
 			<main className='relative h-auto min-h-[100vh] w-[100vw] flex flex-col items-center justify-center'>
@@ -46,10 +63,7 @@ const App = () => {
 				)}
 				<div className='w-full relative'>
 					{!user ? (
-						<WelcomePage
-							handleClick={handleClick}
-							setAlertMessage={setAlertMessage}
-						/>
+						<WelcomePage handleClick={handleClick} />
 					) : (
 						<>
 							<PageHeader />
