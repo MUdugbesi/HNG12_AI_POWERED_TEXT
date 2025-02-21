@@ -3,13 +3,17 @@ import WelcomePage from './pages/WelcomePage';
 import Translate from './pages/Translate';
 import AlertMessageHandler from './components/AlertMessageHandler';
 import PageHeader from './components/PageHeader';
+import {
+	setTranslatorApiToken,
+	setDetectorApiToken,
+	setSummarizerApiToken,
+} from './utils';
 
 const App = () => {
 	const [user, setUser] = useState(false);
 
 	const [alertMessage, setAlertMessage] = useState(null);
 	const [generalMessage, setGeneralMessage] = useState({});
-
 	useEffect(() => {
 		let alertTimeout;
 		let generalTimeout;
@@ -35,8 +39,12 @@ const App = () => {
 
 	const getBrowserAgent = () => {
 		const userAgent = navigator.userAgent;
-
-		if (!userAgent.includes('Chrome')) {
+		console.log(userAgent);
+		if (
+			!userAgent.includes('Chrome') &&
+			!userAgent.includes('Firefox') &&
+			!userAgent.includes('Microsoft')
+		) {
 			return;
 		}
 		return true;
@@ -51,6 +59,14 @@ const App = () => {
 			});
 		}
 	};
+
+	// Add token to head on mount
+
+	useEffect(() => {
+		setTranslatorApiToken();
+		setDetectorApiToken();
+		setSummarizerApiToken();
+	}, []);
 
 	return (
 		<>

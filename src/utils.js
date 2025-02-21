@@ -115,6 +115,71 @@ export const summarizeText = async (
 	return summaryBulletPoints;
 };
 
+export const setTranslatorApiToken = () => {
+	const apiToken = import.meta.env.VITE_TRANSLATOR_API;
+	if (!apiToken) {
+		console.warn('VITE_DETECTOR_API is not defined.');
+		return;
+	}
+	// Check for existing meta tag
+	const existingMeta = Array.from(document.getElementsByTagName('meta')).find(
+		(meta) => meta.httpEquiv === 'origin-trial' && meta.content === apiToken
+	);
+	if (existingMeta) {
+		console.log('Origin trial meta tag already exists.');
+		return;
+	}
+
+	const otMeta = document.createElement('meta');
+	otMeta.httpEquiv = 'origin-trial';
+	otMeta.content = apiToken;
+	document.head.append(otMeta);
+};
+export const setDetectorApiToken = () => {
+	const apiToken = import.meta.env.VITE_DETECTOR_API;
+	if (!apiToken) {
+		console.warn('VITE_DETECTOR_API is not defined.');
+		return;
+	}
+	// Check for existing meta tag
+	const existingMeta = Array.from(document.getElementsByTagName('meta')).find(
+		(meta) => meta.httpEquiv === 'origin-trial' && meta.content === apiToken
+	);
+	if (existingMeta) {
+		console.log('Origin trial meta tag already exists.');
+		return;
+	}
+
+	const otMeta = document.createElement('meta');
+	otMeta.httpEquiv = 'origin-trial';
+	otMeta.content = apiToken;
+	document.head.append(otMeta);
+};
+
+export const setSummarizerApiToken = () => {
+	const apiToken = import.meta.env.VITE_SUMMARIZER_API;
+
+	if (!apiToken) {
+		console.warn('VITE_SUMMARIZER_API is not defined.');
+		return;
+	}
+
+	// Check for existing meta tag
+	const existingMeta = Array.from(document.getElementsByTagName('meta')).find(
+		(meta) => meta.httpEquiv === 'origin-trial' && meta.content === apiToken
+	);
+
+	if (existingMeta) {
+		console.log('Origin trial meta tag already exists.');
+		return;
+	}
+
+	const otMeta = document.createElement('meta');
+	otMeta.httpEquiv = 'origin-trial';
+	otMeta.content = apiToken;
+	document.head.append(otMeta);
+};
+
 export const languagesList = [
 	{ lang: 'Afrikaans', code: 'af' },
 	{ lang: 'Albanian', code: 'sq' },
