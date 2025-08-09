@@ -17,7 +17,7 @@ const Previewer = ({
 	return (
 		<>
 			<div className='min-h-[340px] md:min-h-[400px] h-auto w-[90%] mx-auto md:px-6 py-2 flex flex-col gap-5 md:gap-10'>
-				<div className='grid grid-cols-2 w-full mx-auto'>
+				<div className='grid grid-cols-2 w-full mx-auto h-auto'>
 					<div></div>
 					<div className=''>
 						<p className='text-[12px] md:text-[15px] pt-2 rounded-xl p-3 float-right bg-[#224e84]'>

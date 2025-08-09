@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { BiArrowBack } from 'react-icons/bi';
 import PageHeader from '../components/PageHeader';
-import { handleAiDetectLang, languagesList, summarizeText } from '../utils';
+import {
+	handleAiDetectLang,
+	languagesList,
+	summarizeText,
+	handleTranslateText,
+} from '../utils';
 import Previewer from '../components/Previewer';
 import Form from '../components/Form';
 import MessageHandler from '../components/Message';
@@ -9,7 +14,7 @@ import MessageHandler from '../components/Message';
 const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 	const [translatedContent, setTranslatedContent] = useState('');
 	const [text, setText] = useState('');
-	const [userInput, setUserInput] = useState('');
+	const [userInput, setUserInput] = useState(['Nme', 'HELLO']);
 	const [detectedLang, setDetectedLang] = useState('');
 	const [detectedLanguageCode, setDetectedLanguageCode] = useState('');
 	const [summarizedText, setSummarizedText] = useState([]);
@@ -36,7 +41,6 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 						text: 'Language detection failed, not found!',
 						type: 'error',
 					});
-					console.log('error');
 				}
 			} else {
 				setGeneralMessage({
@@ -79,22 +83,32 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 	};
 
 	const handleTranslate = useCallback(
-		(e) => {
+		async (e) => {
 			e.preventDefault();
-			if (
-				text.length > 0 ||
-				userInput.length > 0 ||
-				translatedContent ||
-				summarizedText
-			) {
-				setUserInput(text);
-				setText('');
-				setTranslatedContent('');
-				setSummarizedText('');
-			}
+
+			// setUserInput((prev) => [...prev, text]);
+			// setText('');
+			// setTranslatedContent('');
+			// setSummarizedText('');
+
+			e.preventDefault();
+			if (!text.trim()) return;
+
+			const newInput = {
+				text: text.trim(),
+				translated: '',
+				summary: '',
+				language: '',
+			};
+
+			// Update userInput with new object
+			setUserInput((prev) => [...prev, newInput]);
+			setText('');
+			setTranslatedContent('');
+			setSummarizedText('');
 		},
 
-		[summarizedText, text, translatedContent, userInput.length]
+		[text, userInput]
 	);
 
 	useEffect(() => {
@@ -106,7 +120,7 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 		setUser(null);
 	};
 
-	
+	const createNewMessage = () => {};
 
 	return (
 		<>
@@ -129,21 +143,24 @@ const Translate = ({ setUser, generalMessage, setGeneralMessage }) => {
 						!userInput ? 'justify-center items-center' : 'justify-between'
 					} flex-col`}
 				>
-					{userInput && (
-						<Previewer
-							userInput={userInput}
-							translatedContent={translatedContent}
-							detectedLang={detectedLang}
-							detectedLanguageCode={detectedLanguageCode}
-							handleTranslate={handleTranslate}
-							setTranslatedContent={setTranslatedContent}
-							handleSummarizeText={handleSummarizeText}
-							summarizedText={summarizedText}
-							setGeneralMessage={setGeneralMessage}
-							isSummarizing={isSummarizing}
-							setIsSummarizing={setIsSummarizing}
-						/>
-					)}
+					{userInput &&
+						userInput.map((input) => (
+							<>
+								<Previewer
+									userInput={input}
+									translatedContent={translatedContent}
+									detectedLang={detectedLang}
+									detectedLanguageCode={detectedLanguageCode}
+									handleTranslate={handleTranslate}
+									setTranslatedContent={setTranslatedContent}
+									handleSummarizeText={handleSummarizeText}
+									summarizedText={summarizedText}
+									setGeneralMessage={setGeneralMessage}
+									isSummarizing={isSummarizing}
+									setIsSummarizing={setIsSummarizing}
+								/>
+							</>
+						))}
 					<Form
 						handleTranslate={handleTranslate}
 						handleChange={handleInputChange}

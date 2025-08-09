@@ -39,7 +39,6 @@ const App = () => {
 
 	const getBrowserAgent = () => {
 		const userAgent = navigator.userAgent;
-		console.log(userAgent);
 		if (
 			!userAgent.includes('Chrome') &&
 			!userAgent.includes('Firefox') &&
